@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
-#include "Player.h"
-#include "Bullet.h" // Include Bullet header
+#include "include\Player.h"
+#include "include\Bullet.h" // Include Bullet header
 #include <iostream>
 #include <vector> // To store bullets in a vector
 

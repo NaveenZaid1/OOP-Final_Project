@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
-#include "Player.h"
-#include "Bullet.h" // Include Bullet header
-#include "Enemy.h"
+#include "C:\Users\User\Documents\Sem 5\OOP\project\OOP Project\OOP-Final_Project\include\Player.h"
+#include "C:\Users\User\Documents\Sem 5\OOP\project\OOP Project\OOP-Final_Project\include\Bullet.h" // Include Bullet header
+#include "C:\Users\User\Documents\Sem 5\OOP\project\OOP Project\OOP-Final_Project\include\Enemy.h"
 #include <iostream>
 #include <vector> // To store bullets in a vector
 
@@ -17,14 +17,14 @@ int main()
     sf::RenderWindow window(sf::VideoMode(800, 600), "GAME SCREEN");
 
     sf::Font font;
-    if (!font.loadFromFile("VGA New.ttf"))
+    if (!font.loadFromFile("SFML\\Fonts\\VGA New.ttf"))
     {
         std::cerr << "Error loading font!" << std::endl;
         return -1;
     }
 
     sf::Texture backgroundTexture;
-    if (!backgroundTexture.loadFromFile("background.png"))
+    if (!backgroundTexture.loadFromFile("assets\\background.png"))
     {
         std::cerr << "Error loading background image!" << std::endl;
         return -1;
@@ -32,7 +32,7 @@ int main()
     sf::Sprite background(backgroundTexture);
 
     sf::Texture gameBackgroundTexture;
-    if (!gameBackgroundTexture.loadFromFile("game_background.png"))
+    if (!gameBackgroundTexture.loadFromFile("assets\\game_background.png"))
     {
         std::cerr << "Error loading game background image!" << std::endl;
         return -1;
@@ -69,7 +69,7 @@ int main()
     // Player setup
     int score = 0;
     Player player;
-    if (!player.loadTexture("player.png"))
+    if (!player.loadTexture("assets\\player.png"))
     {
         std::cerr << "Error loading player sprite!" << std::endl;
         return -1;
@@ -82,11 +82,11 @@ int main()
 
     // Enemy setup
     sf::Texture enemytex;
-    enemytex.loadFromFile("file.png");
+    enemytex.loadFromFile("assets\\file.png");
     sf::Texture enemytex2;
-    enemytex2.loadFromFile("EnemyBig.png");
+    enemytex2.loadFromFile("assets\\EnemyBig.png");
     sf::Texture enemytex3;
-    enemytex3.loadFromFile("Enemy3.png");
+    enemytex3.loadFromFile("assets\\Enemy3.png");
     int EnemySpawnTimer = 0;
     std::vector<Enemy *> enemies;
 

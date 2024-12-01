@@ -1,9 +1,9 @@
-#include "Bullet.h"
+#include "C:\Users\User\Documents\Sem 5\OOP\project\OOP Project\OOP-Final_Project\include\Bullet.h"
 #include <iostream>
 
 Bullet::Bullet()
 {
-    if (!loadTexture("bullet.png"))
+    if (!loadTexture("assets\\bullet.png"))
     { 
         std::cerr << "Error loading bullet texture!" << std::endl;
     }
@@ -11,7 +11,7 @@ Bullet::Bullet()
 
 Bullet::Bullet(float x, float y)
 {
-    if (!bulletTexture.loadFromFile("bullet.png"))
+    if (!bulletTexture.loadFromFile("assets\\bullet.png"))
     {
         std::cerr << "Error loading bullet texture!" << std::endl;
     }
