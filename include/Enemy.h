@@ -1,17 +1,17 @@
-// #ifndef ENEMY_H
-// #define ENEMY_H
 #pragma once
 
 #include <SFML/Graphics.hpp>
 #include <bits/stdc++.h>
 #include <cstdlib>
-class Enemy {
-public:
+class Enemy 
+{
+private:
     sf::Texture enemyTexture;
+
+public:
     sf::Sprite enemySprite;
-    int HP;
-    int HPMax;
     float speed;
+    int type;
     
     Enemy()=default;
     Enemy(sf::Texture* tex, float speed, sf::Vector2u windowSize);
@@ -23,7 +23,7 @@ public:
     
 };
 
-
+//change here name of classes
 class Enemy2: public Enemy
 {
     public:
@@ -37,8 +37,5 @@ class Enemy3 : public Enemy
         float diagonalSpeedX; // Speed in the horizontal direction
 
         Enemy3(sf::Texture* tex, float speed, sf::Vector2u windowSize);
-        void update() override; // Override update method to include diagonal movement
+        void update() override; /////// Override update method to include diagonal movement//chanmg here
 };
-
-
-// #endif
