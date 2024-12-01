@@ -238,7 +238,7 @@ int main()
                     // Check if player's HP has reached 0 and end the game if so
                     if (player.getHP() <= 0)
                     {
-                        currentState = GameState::MENU;  // You can replace this with a game over screen
+                        currentState = GameState::MENU;  // Replace this with a game over screen
                         player.setHP(3); //Reset HP
                         break; // Break the loop if the game is over
                     }
@@ -252,12 +252,13 @@ int main()
             // score update
             score_text.setString("Score: " + std::to_string(score));
             window.draw(score_text);
+            // HP update
+            HPtext.setString("HP: " + std::to_string(player.getHP()));
+            window.draw(HPtext);
         }
 
         window.display();
-        // HP update
-        HPtext.setString("HP: " + std::to_string(player.getHP()));
-        window.draw(HPtext);
+
     }
 
     return 0;
