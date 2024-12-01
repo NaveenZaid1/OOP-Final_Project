@@ -69,6 +69,13 @@ int main()
     score_text.setFillColor(sf::Color::White);
     score_text.setPosition(10.f, 10.f);
 
+    // HPtext setup
+    sf::Text HPtext;
+    HPtext.setFont(font);
+    HPtext.setCharacterSize(20);
+    HPtext.setFillColor(sf::Color::White);
+    HPtext.setPosition(10.f, 30.f);
+
     // Player setup
     int score = 0;
     Player player;
@@ -159,12 +166,15 @@ int main()
                 {
                     if (player.weapon.bullets[i].getBounds().intersects(enemies[j]->enemySprite.getGlobalBounds()))
                     {
+                        if (enemies[j]->type==0){score++;} // Increase score
+                        if (enemies[j]->type==1){score+=3;}
+                        if (enemies[j]->type==2){score+=5;}
+                        
                         // Bullet hit the enemy, remove both bullet and enemy
                         delete enemies[j];                  // Remove the enemy
                         enemies.erase(enemies.begin() + j); // Remove enemy from vector
 
                         player.weapon.bullets.erase(player.weapon.bullets.begin() + i); // Remove bullet from vector
-                        score++;                                                        // Increase score
                         break;                                                          // Exit inner loop to avoid invalidating iterator after erasing an element
                     }
                 }
@@ -200,12 +210,12 @@ int main()
                 }
                 else if (enemyType == 1)
                 {
-                    enemies.push_back(new EnemyDiagonal(&enemytex3, 2.0f, window.getSize()));
+                    enemies.push_back(new Enemy2(&enemytex2, 2.0f, window.getSize()));
                     // speed = 1.0f;
                 }
                 else if (enemyType == 2)
                 {
-                    enemies.push_back(new EnemySmall(&enemytex2, 1.0f, window.getSize()));
+                    enemies.push_back(new Enemy3(&enemytex3, 1.0f, window.getSize()));
                 }
                 EnemySpawnTimer = 0;
             }
@@ -221,7 +231,15 @@ int main()
                 {
                     delete enemies[i];
                     enemies.erase(enemies.begin() + i);
-                    player.HP--;
+                    
+                    player.HP--;//Decrease Player's HP
+                    // Check if player's HP has reached 0 and end the game if so
+                    if (player.getHP() <= 0)
+                    {
+                        currentState = GameState::MENU;  // You can replace this with a game over screen
+                        player.setHP(3); //Reset HP
+                        break; // Break the loop if the game is over
+                    }
                 }
             }
             for (size_t i = 0; i < enemies.size(); i++)
@@ -235,6 +253,9 @@ int main()
         }
 
         window.display();
+        // HP update
+        HPtext.setString("HP: " + std::to_string(player.getHP()));
+        window.draw(HPtext);
     }
 
     return 0;
