@@ -24,19 +24,19 @@ public:
 };
 
 
-class EnemySmall: public Enemy
+class Enemy2: public Enemy
 {
     public:
-        EnemySmall(sf::Texture* tex, float speed, sf::Vector2u windowSize);
+        Enemy2(sf::Texture* tex, float speed, sf::Vector2u windowSize);
 };
 
 
-class EnemyDiagonal : public Enemy 
+class Enemy3 : public Enemy 
 {
     public:
         float diagonalSpeedX; // Speed in the horizontal direction
 
-        EnemyDiagonal(sf::Texture* tex, float speed, sf::Vector2u windowSize);
+        Enemy3(sf::Texture* tex, float speed, sf::Vector2u windowSize);
         void update() override; // Override update method to include diagonal movement
 };
 
