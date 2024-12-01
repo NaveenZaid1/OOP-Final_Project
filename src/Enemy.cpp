@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <bits/stdc++.h>
 using namespace std;
-#include "C:\Users\User\Documents\Sem 5\OOP\project\OOP Project\OOP-Final_Project\include\Enemy.h"
+#include "Enemy.h"
 #include <cstdlib>
 
 //Basic Enemy
@@ -11,6 +11,7 @@ Enemy::Enemy(sf::Texture* tex, float speed, sf::Vector2u windowSize)
 {
     HPMax = 3;
     HP = HPMax;
+    type = 0;
     if(speed<1.0f){
         speed=1.0f;
     }
@@ -27,7 +28,7 @@ void Enemy::setPosition(float x, float y)
 
 void Enemy::update() 
 {
-    enemySprite.move(0, 1.0f);
+    enemySprite.move(0, 0.7f);
 }
 
 bool Enemy::isOffScreen(float windowHeight) const {
@@ -40,32 +41,32 @@ void Enemy::draw(sf::RenderWindow& window) {
 }
 
 
-//EnemySmall
-EnemySmall::EnemySmall(sf::Texture* tex, float speed, sf::Vector2u windowSize): Enemy(tex, speed, windowSize) 
+//Enemy2
+Enemy2::Enemy2(sf::Texture* tex, float speed, sf::Vector2u windowSize): Enemy(tex, speed, windowSize) 
 {
     HPMax = 3;
     HP = HPMax;
-
+    type = 1;
     enemySprite.setScale(0.2f, 0.2f);
     float randomX = static_cast<float>(rand() % static_cast<int>(windowSize.x - (enemySprite.getGlobalBounds().width)));
     enemySprite.setPosition(randomX, -50.0f); // Staggered positions
 }
 
-//EnemyDiagonal
-EnemyDiagonal::EnemyDiagonal(sf::Texture* tex, float speed, sf::Vector2u windowSize): Enemy(tex, speed, windowSize) 
+//Enemy3
+Enemy3::Enemy3(sf::Texture* tex, float speed, sf::Vector2u windowSize): Enemy(tex, speed, windowSize) 
 {
     HPMax = 2;
     HP = HPMax;
-
+    type = 2;
     diagonalSpeedX = (rand() % 2 == 0) ? 2.0f : -2.0f; // Randomly move left or right
     enemySprite.setScale(0.08f, 0.08f); // Slightly smaller size
     float randomX = static_cast<float>(rand() % static_cast<int>(windowSize.x - enemySprite.getGlobalBounds().width));
     enemySprite.setPosition(randomX, -50.0f); // Start position
 }
 
-void EnemyDiagonal::update()
+void Enemy3::update()
 {
-    enemySprite.move(0, 1.0f); // Move diagonally
+    enemySprite.move(0, 0.7f);
 
     // Reverse direction if hitting screen edges
     if (enemySprite.getPosition().x <= 0 || 
