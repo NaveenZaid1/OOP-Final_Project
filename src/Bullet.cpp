@@ -1,53 +1,38 @@
 #include "C:\Users\User\Documents\Sem 5\OOP\project\OOP Project\OOP-Final_Project\include\Bullet.h"
 #include <iostream>
 
-Bullet::Bullet()
+Bullet::Bullet(float x, float y) : speed(5.0f)
 {
-    if (!loadTexture("assets\\bullet.png"))
-    { 
-        std::cerr << "Error loading bullet texture!" << std::endl;
-    }
-}
+    // Create a small red circle for the bullet
+    bulletShape.setRadius(5.0f);
+    bulletShape.setFillColor(sf::Color::Red);
 
-Bullet::Bullet(float x, float y)
-{
-    if (!bulletTexture.loadFromFile("assets\\bullet.png"))
-    {
-        std::cerr << "Error loading bullet texture!" << std::endl;
-    }
-    bulletSprite.setTexture(bulletTexture);
-    bulletSprite.setPosition(x, y); // Set the position
-}
-
-bool Bullet::loadTexture(const std::string &filepath)
-{
-    if (!bulletTexture.loadFromFile(filepath))
-    {
-        return false;
-    }
-    bulletSprite.setTexture(bulletTexture);
-    return true;
-}
-
-void Bullet::setPosition(float x, float y)
-{
-    bulletSprite.setPosition(x, y);
+    // Center the bullet at the given x and y coordinates
+    bulletShape.setPosition(x - bulletShape.getRadius(), y);
 }
 
 void Bullet::update()
 {
-    bulletSprite.move(0, -5); // Move the bullet upwards
+    // Move the bullet upwards
+    bulletShape.move(0, -speed);
 }
 
 void Bullet::draw(sf::RenderWindow &window)
 {
-    window.draw(bulletSprite);
+    window.draw(bulletShape);
 }
-bool Bullet::isOffScreen(int windowHeight) const
-{
-    return bulletSprite.getPosition().y < 0 || bulletSprite.getPosition().y > windowHeight;
-}
+
 float Bullet::getWidth() const
 {
-    return bulletSprite.getGlobalBounds().width;
+    return bulletShape.getRadius() * 2.0f;
+}
+
+float Bullet::getHeight() const
+{
+    return bulletShape.getRadius() * 2.0f;
+}
+
+sf::FloatRect Bullet::getBounds() const
+{
+    return bulletShape.getGlobalBounds();
 }

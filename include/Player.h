@@ -9,27 +9,31 @@ class Player
 private:
     sf::Texture playerTexture;
     sf::Sprite playerSprite;
-    Weapon weapon; // Composite: Player owns a Weapon
 
 public:
-    int HP=HPMax;
-    int HPMax=10; 
-    bool loadTexture(const std::string &filepath); // Load the player texture
-    void setPosition(float x, float y);            // Set player position
-    void scale(float scaleX, float scaleY);        // Scale the player sprite
-    void update();                                 // Update player position
-    void stayWithinBounds();                       // Keep player within window bounds
-    void fire();                                   // Delegate firing to Weapon
-    void updateBullets(float windowHeight);        // Update bullets through Weapon
-    void draw(sf::RenderWindow &window);           // Draw player and bullets
+    Weapon weapon;
+    int HP = 3; // Added HP tracking
+    bool loadTexture(const std::string &filepath);
+    void setPosition(float x, float y);
+    void scale(float scaleX, float scaleY);
+    void update();
+    void draw(sf::RenderWindow &window);
+
+    void stayWithinBounds();
+    void fire();
+    void updateBullets(float windowHeight);
+
     sf::Vector2f getPosition() const;
-
-    // Add this method to get the width of the player sprite
     float getWidth() const;
-
-    //added
     sf::FloatRect GetGlobalBounds() const;
 
+    // Getter for HP
+    int getHP() const { return HP; }
+
+    // Setter for HP (optional, but can be useful)
+    void setHP(int hp) { HP = hp; }
+    // sf::FloatRect GetGlobalBounds() const;
+    
 };
 
 #endif

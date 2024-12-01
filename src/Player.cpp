@@ -73,8 +73,7 @@ float Player::getWidth() const
     return playerSprite.getGlobalBounds().width; // Get width of player sprite
 }
 
-//added
-sf::FloatRect Player::GetGlobalBounds() const 
+sf::FloatRect Player::GetGlobalBounds() const
 {
     return playerSprite.getGlobalBounds();
 }

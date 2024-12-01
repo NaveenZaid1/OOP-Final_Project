@@ -2,6 +2,7 @@
 #include "C:\Users\User\Documents\Sem 5\OOP\project\OOP Project\OOP-Final_Project\include\Player.h"
 #include "C:\Users\User\Documents\Sem 5\OOP\project\OOP Project\OOP-Final_Project\include\Bullet.h" // Include Bullet header
 #include "C:\Users\User\Documents\Sem 5\OOP\project\OOP Project\OOP-Final_Project\include\Enemy.h"
+#include "C:\Users\User\Documents\Sem 5\OOP\project\OOP Project\OOP-Final_Project\include\laser.h"
 #include <iostream>
 #include <vector> // To store bullets in a vector
 
@@ -10,6 +11,8 @@ enum class GameState
     MENU,
     GAME
 };
+
+
 
 int main()
 {
@@ -78,7 +81,7 @@ int main()
     player.scale(0.2f, 0.2f);
 
     // Bullet setup
-    std::vector<Bullet> bullets; // Vector to store bullets
+    // std::vector<Bullet> bullets; // Vector to store bullets
 
     // Enemy setup
     sf::Texture enemytex;
@@ -117,9 +120,7 @@ int main()
             //  Shooting bullets when spacebar is pressed
             if (currentState == GameState::GAME && event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space)
             {
-                Bullet bullet(player.getPosition().x + player.getWidth() / 2 - bullet.getWidth() / 2, player.getPosition().y);
-                // Create the bullet at the player's location
-                bullets.push_back(bullet); // Add the bullet to the vector
+                player.fire();
             }
         }
 
@@ -139,17 +140,25 @@ int main()
             player.update();
             window.draw(gameBackground);
             player.draw(window);
+            player.updateBullets(window.getSize().y);
 
-            // Update and draw all bullets
-            for (auto &bullet : bullets)
+            // Check for collisions between bullets and enemies
+            for (size_t i = 0; i < player.weapon.bullets.size(); i++)
             {
-                bullet.update();     // Move the bullet
-                bullet.draw(window); // Draw the bullet
+                for (size_t j = 0; j < enemies.size(); j++)
+                {
+                    if (player.weapon.bullets[i].getBounds().intersects(enemies[j]->enemySprite.getGlobalBounds()))
+                    {
+                        // Bullet hit the enemy, remove both bullet and enemy
+                        delete enemies[j];                  // Remove the enemy
+                        enemies.erase(enemies.begin() + j); // Remove enemy from vector
+
+                        player.weapon.bullets.erase(player.weapon.bullets.begin() + i); // Remove bullet from vector
+                        score++;                                                        // Increase score
+                        break;                                                          // Exit inner loop to avoid invalidating iterator after erasing an element
+                    }
+                }
             }
-            // //collsion wuth bulletr
-            // for (size_t k=0; k<enemies.size(); k++){
-            //     if (player.weapon.bullets)
-            //      score++
 
             // Enemy
             if (EnemySpawnTimer < 200)

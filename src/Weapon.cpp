@@ -2,31 +2,34 @@
 
 void Weapon::fire(float x, float y)
 {
-    bullets.emplace_back(x, y); // Add a new bullet at the specified position
+    // Create a new bullet at the specified position
+    bullets.emplace_back(x, y);
 }
+
 
 void Weapon::update(float windowHeight)
 {
-    for (size_t i = 0; i < bullets.size(); ++i)
+    // Remove bullets that have gone off the screen
+    bullets.erase(
+        std::remove_if(bullets.begin(), bullets.end(),
+                       [windowHeight](const Bullet &bullet)
+                       {
+                           return bullet.getBounds().top + bullet.getHeight() < 0;
+                       }),
+        bullets.end());
+
+    // Update remaining bullets
+    for (auto &bullet : bullets)
     {
-        bullets[i].update();
-        if (bullets[i].isOffScreen(windowHeight))
-        {
-            bullets.erase(bullets.begin() + i); // Remove bullet if it's off-screen
-            --i;                                // Adjust index after removal
-        }
+        bullet.update();
     }
 }
 
 void Weapon::draw(sf::RenderWindow &window)
 {
+    // Draw all bullets
     for (auto &bullet : bullets)
     {
         bullet.draw(window);
     }
-}
-
-std::vector<Bullet> &Weapon::getBullets()
-{
-    return bullets;
 }
