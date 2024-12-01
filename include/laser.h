@@ -1,18 +1,27 @@
-#pragma once
+#ifndef LASER_H
+#define LASER_H
+
 #include <SFML/Graphics.hpp>
-#include "C:\Users\User\Documents\Sem 5\OOP\project\OOP Project\OOP-Final_Project\include\Weapon.h"
 
-class Laser : public Weapon
+class Laser
 {
-public:
-    Laser(const sf::Texture &texture, const sf::Vector2f &startPosition);
-    void update(float deltaTime);           // Update the laser's movement
-    void draw(sf::RenderWindow &window);    // Draw laser sprite
-    bool isOutOfBounds(float screenHeight); // Check if laser is out of screen bounds
-
-    // You can add additional functionality like changing the laser's color, speed, etc.
-
 private:
-    sf::Sprite laserSprite; // Laser sprite
-    float speed;            // Speed of the laser
+    sf::Sprite laserSprite;
+    float speed;
+
+public:
+    // Default constructor
+    Laser();
+
+    // Parameterized constructor
+    Laser(float x, float y, sf::Texture *laserTexture);
+
+    void update();
+    void draw(sf::RenderWindow &window);
+
+    float getWidth() const;
+    float getHeight() const;
+    sf::FloatRect getBounds() const;
 };
+
+#endif

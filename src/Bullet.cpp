@@ -4,7 +4,7 @@
 Bullet::Bullet(float x, float y) : speed(5.0f)
 {
     // Create a small red circle for the bullet
-    bulletShape.setRadius(5.0f);
+    bulletShape.setRadius(10.0f);
     bulletShape.setFillColor(sf::Color::Red);
 
     // Center the bullet at the given x and y coordinates

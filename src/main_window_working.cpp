@@ -118,9 +118,18 @@ int main()
 
             // Update
             //  Shooting bullets when spacebar is pressed
-            if (currentState == GameState::GAME && event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space)
+            if (currentState == GameState::GAME && event.type == sf::Event::KeyPressed)
             {
-                player.fire();
+                if (event.key.code == sf::Keyboard::Space) // Switch to Bullet
+                {
+                    player.weapon.switchWeaponType(WeaponType::BULLET);
+                    player.weapon.fire(player.getPosition().x, player.getPosition().y);
+                }
+                else if (event.key.code == sf::Keyboard::L) // Switch to Laser
+                {
+                    player.weapon.switchWeaponType(WeaponType::LASER);
+                    player.weapon.fire(player.getPosition().x, player.getPosition().y);
+                }
             }
         }
 
@@ -141,6 +150,7 @@ int main()
             window.draw(gameBackground);
             player.draw(window);
             player.updateBullets(window.getSize().y);
+            
 
             // Check for collisions between bullets and enemies
             for (size_t i = 0; i < player.weapon.bullets.size(); i++)
@@ -156,6 +166,21 @@ int main()
                         player.weapon.bullets.erase(player.weapon.bullets.begin() + i); // Remove bullet from vector
                         score++;                                                        // Increase score
                         break;                                                          // Exit inner loop to avoid invalidating iterator after erasing an element
+                    }
+                }
+            }
+            // Collision detection for lasers
+            for (size_t i = 0; i < player.weapon.lasers.size(); i++)
+            {
+                for (size_t j = 0; j < enemies.size(); j++)
+                {
+                    if (player.weapon.lasers[i].getBounds().intersects(enemies[j]->enemySprite.getGlobalBounds()))
+                    {
+                        delete enemies[j];
+                        enemies.erase(enemies.begin() + j);
+                        player.weapon.lasers.erase(player.weapon.lasers.begin() + i);
+                        score++;
+                        break;
                     }
                 }
             }
