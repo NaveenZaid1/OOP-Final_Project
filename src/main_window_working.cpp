@@ -186,10 +186,12 @@ int main()
                 {
                     if (player.weapon.lasers[i].getBounds().intersects(enemies[j]->enemySprite.getGlobalBounds()))
                     {
+                        if (enemies[j]->type==0){score++;} // Increase score
+                        if (enemies[j]->type==1){score+=3;}
+                        if (enemies[j]->type==2){score+=5;}
                         delete enemies[j];
                         enemies.erase(enemies.begin() + j);
                         player.weapon.lasers.erase(player.weapon.lasers.begin() + i);
-                        score++;
                         break;
                     }
                 }
