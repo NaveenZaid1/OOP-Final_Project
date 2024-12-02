@@ -279,10 +279,10 @@ int main()
         else if (currentState == GameState::GAME_OVER)
         {
             sf::Text gameOverText("GAME OVER", font, 90);
-            gameOverText.setFillColor(sf::Color::Red);
+            gameOverText.setFillColor(sf::Color::Green);
             gameOverText.setPosition(200, 200);
 
-            sf::Text restartText("Press R to Restart or ESC to Quit", font, 30);
+            sf::Text restartText("R to Restart OR ESC to Quit", font, 30);
             restartText.setFillColor(sf::Color::White);
             restartText.setPosition(150, 400);
 
