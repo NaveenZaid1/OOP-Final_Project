@@ -122,6 +122,20 @@ int main()
                     currentState = GameState::GAME;
                 }
             }
+            if (currentState == GameState::GAME_OVER && event.type == sf::Event::KeyPressed)
+            {
+                if (event.key.code == sf::Keyboard::R)
+                {
+                    currentState = GameState::GAME; // Restart the game
+                    player.setHP(3);               // Reset player's HP
+                    score = 0;                     // Reset the score
+
+                    // Clear existing enemies
+                    for (Enemy *enemy : enemies)
+                        delete enemy;
+                    enemies.clear();
+                }
+            }
 
             // Update
             //  Shooting bullets when spacebar is pressed
@@ -236,18 +250,23 @@ int main()
                     
                     player.HP--;//Decrease Player's HP
                     // Check if player's HP has reached 0 and end the game if so
-                    if (player.getHP() <= 0)
-                    {
-                        currentState = GameState::MENU;  // Replace this with a game over screen
-                        player.setHP(3); //Reset HP
-                        break; // Break the loop if the game is over
-                    }
+                    // if (player.getHP() <= 0)
+                    // {
+                    //     currentState = GameState::MENU;  // Replace this with a game over screen
+                    //     player.setHP(3); //Reset HP
+                    //     break; // Break the loop if the game is over
+                    // }
                 }
             }
             for (size_t i = 0; i < enemies.size(); i++)
             {
                 enemies[i]->draw(window);
             }
+            if (player.getHP() <= 0)
+            {
+                currentState = GameState::GAME_OVER; // Switch to GAME_OVER state
+            }
+            
 
             // score update
             score_text.setString("Score: " + std::to_string(score));
@@ -255,6 +274,23 @@ int main()
             // HP update
             HPtext.setString("HP: " + std::to_string(player.getHP()));
             window.draw(HPtext);
+        }
+
+        else if (currentState == GameState::GAME_OVER)
+        {
+            sf::Text gameOverText("GAME OVER", font, 90);
+            gameOverText.setFillColor(sf::Color::Red);
+            gameOverText.setPosition(200, 200);
+
+            sf::Text restartText("Press R to Restart or ESC to Quit", font, 30);
+            restartText.setFillColor(sf::Color::White);
+            restartText.setPosition(150, 400);
+
+            window.draw(background);
+            window.draw(gameOverText);
+            window.draw(restartText);
+
+            
         }
 
         window.display();
