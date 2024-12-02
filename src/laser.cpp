@@ -2,10 +2,7 @@
 #include <iostream>
 
 // Default constructor
-Laser::Laser() : speed(5.0f)
-{
-    // Initialize with default values if needed
-}
+Laser::Laser() : speed(5.0f){}
 
 Laser::Laser(float x, float y, sf::Texture *laserTexture) : speed(5.0f)
 {
@@ -15,7 +12,6 @@ Laser::Laser(float x, float y, sf::Texture *laserTexture) : speed(5.0f)
         // Set the laser sprite with the provided texture
         laserSprite.setTexture(*laserTexture);
 
-        // Scale the laser sprite (adjust as needed)
         laserSprite.setScale(0.5f, 0.5f);
 
         // Center the laser at the given x and y coordinates
