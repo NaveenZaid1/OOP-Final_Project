@@ -5,9 +5,8 @@
 Weapon::Weapon() : currentWeaponType(WeaponType::BULLET)
 {
     // Load laser texture
-    if (!laserTexture.loadFromFile("assets\\laser.png")) // Adjust path as needed
+    if (!laserTexture.loadFromFile("assets\\laser.png")) 
     {
-        // Handle texture loading error
         std::cerr << "Failed to load laser texture!" << std::endl;
     }
 }
