@@ -284,7 +284,7 @@ int main()
 
             sf::Text restartText("R to Restart OR ESC to Quit", font, 30);
             restartText.setFillColor(sf::Color::White);
-            restartText.setPosition(150, 400);
+            restartText.setPosition(199, 400);
 
             window.draw(background);
             window.draw(gameOverText);
