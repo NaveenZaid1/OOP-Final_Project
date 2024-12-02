@@ -3,7 +3,6 @@
 
 Bullet::Bullet(float x, float y) : speed(5.0f)
 {
-    // Create a small red circle for the bullet
     bulletShape.setRadius(10.0f);
     bulletShape.setFillColor(sf::Color::Red);
 
