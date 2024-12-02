@@ -11,7 +11,7 @@ private:
 
 public:
     Bullet(float x, float y);
-    Bullet(); // Default constructor
+    Bullet(); 
 
     void update();
     void draw(sf::RenderWindow &window);
@@ -20,6 +20,5 @@ public:
     float getHeight() const;
     sf::FloatRect getBounds() const;
 
-    // Remove texture-related methods
 };
 #endif
