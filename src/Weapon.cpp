@@ -2,7 +2,7 @@
 #include <algorithm>
 #include <iostream>
 
-Weapon::Weapon() : currentWeaponType(WeaponType::BULLET)
+Weapon::Weapon() : currentWeaponType(WeaponType::BULLET) //first bullet by default
 {
     // Load laser texture
     if (!laserTexture.loadFromFile("assets\\laser.png")) 
