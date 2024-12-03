@@ -1,4 +1,4 @@
-#include "C:\Users\User\Documents\Sem 5\OOP\project\OOP Project\OOP-Final_Project\include\laser.h"
+#include "include\laser.h"
 #include <iostream>
 
 // Default constructor
