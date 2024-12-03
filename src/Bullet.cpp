@@ -1,4 +1,4 @@
-#include "C:\Users\User\Documents\Sem 5\OOP\project\OOP Project\OOP-Final_Project\include\Bullet.h"
+#include "include\Bullet.h"
 #include <iostream>
 
 Bullet::Bullet(float x, float y) : speed(5.0f)
