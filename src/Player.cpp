@@ -65,7 +65,7 @@ void Player::draw(sf::RenderWindow &window)
 
 sf::Vector2f Player::getPosition() const
 {
-    return playerSprite.getPosition(); // Assuming you have playerSprite
+    return playerSprite.getPosition(); 
 }
 
 float Player::getWidth() const

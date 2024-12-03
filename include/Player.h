@@ -30,7 +30,7 @@ public:
     // Getter for HP
     int getHP() const { return HP; }
 
-    // Setter for HP (optional, but can be useful)
+    // Setter for HP 
     void setHP(int hp) { HP = hp; }
     // sf::FloatRect GetGlobalBounds() const;
     
