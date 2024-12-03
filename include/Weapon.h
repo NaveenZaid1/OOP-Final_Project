@@ -1,8 +1,8 @@
 #ifndef WEAPON_H
 #define WEAPON_H
 
-#include "C:\Users\User\Documents\Sem 5\OOP\project\OOP Project\OOP-Final_Project\include\Bullet.h"
-#include "C:\Users\User\Documents\Sem 5\OOP\project\OOP Project\OOP-Final_Project\include\laser.h"
+#include "include\Bullet.h"
+#include "include\laser.h"
 #include <vector>
 
 enum class WeaponType
