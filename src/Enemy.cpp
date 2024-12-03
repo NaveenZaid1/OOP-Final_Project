@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <bits/stdc++.h>
 using namespace std;
-#include "C:\Users\User\Documents\Sem 5\OOP\project-clone\OOP-Final_Project\include\Enemy.h"
+#include "include\Enemy.h"
 #include <cstdlib>
 
 //Basic Enemy
